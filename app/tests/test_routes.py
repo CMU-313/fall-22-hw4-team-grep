@@ -14,6 +14,27 @@ def test_base_route():
     assert response.status_code == 200
     assert response.get_data() == b'try the predict route it is great!'
 
+def test_success_predict_route():
+    app = Flask(__name__)
+    configure_routes(app)
+    client = app.test_client()
+    url ='/predict'
+    request_data_1 = {'G1': 15, 'G2': 12, 'failures' : 0, 'studytime' : 4, 'absences' : 1}
+    response_1 = client.get(url, query_string= request_data_1)
+
+    # returns 200 response with succesful admission status (1) 
+    assert response_1.status_code == 200
+    assert response_1.get_data() == {b'1', b'15', b'12', b'0', b'4', b'1'}
+
+
+    # returns 200 response with failure admission status (0)     
+    request_data_2 = {'G1': 3, 'G2': 3, 'failures' : 4, 'studytime' : 1, 'absences' : 7}
+    response_2 = client.get(url, query_string= request_data_2)
+
+    assert response_2.status_code == 200
+    assert response_2.get_data() == {b'0', b'3', b'3', b'4', b'1', b'7'}
+
+
 def test_400_1():
     app = Flask(__name__)
     configure_routes(app)
