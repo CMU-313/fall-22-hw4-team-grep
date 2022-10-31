@@ -1,0 +1,114 @@
+---
+openapi: 3.0.0
+info:
+  title: CMU Admission Predictor
+  description: The API for CMU Admissions to use for evaluating student applications
+  version: 1.0.0
+servers:
+- url: https://virtserver.swaggerhub.com/sanmoyk/teamgrephw4/1.0.0
+  description: SwaggerHub API Auto Mocking
+paths:
+  /predict/:
+    get:
+      tags:
+      - prediction
+      description: returns if an applicant is predicted to be a qualified student at CMU
+      operationId: getPredict
+      parameters:
+      - name: G1
+        in: query
+        description: first period grade
+        required: false
+        style: form
+        explode: true
+        schema:
+          maximum: 20
+          minimum: 0
+          type: integer
+          format: int32
+      - name: G2
+        in: query
+        description: second period grade
+        required: false
+        style: form
+        explode: true
+        schema:
+          maximum: 20
+          minimum: 0
+          type: integer
+          format: int32
+      - name: failures
+        in: query
+        description: number of past class failures
+        required: false
+        style: form
+        explode: true
+        schema:
+          maximum: 4
+          minimum: 1
+          type: integer
+          format: int32
+      - name: studytime
+        in: query
+        description: weekly study time
+        required: false
+        style: form
+        explode: true
+        schema:
+          maximum: 4
+          minimum: 1
+          type: integer
+          format: int32
+      - name: absences
+        in: query
+        description: number of school absences
+        required: false
+        style: form
+        explode: true
+        schema:
+          maximum: 93
+          minimum: 0
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: Successful Prediction
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/prediction'
+        "404":
+          description: Inputted values not found!
+        "400":
+          description: Inputted values are not valid!
+components:
+  schemas:
+    prediction:
+      type: object
+      properties:
+        AdmissionStatus:
+          maximum: 1
+          minimum: 0
+          type: integer
+          format: int32
+          example: 1
+        G1:
+          type: integer
+          format: int32
+          example: 15
+        G2:
+          type: integer
+          format: int32
+          example: 13
+        failures:
+          type: integer
+          format: int32
+          example: 2
+        studytime:
+          type: integer
+          format: int32
+          example: 4
+        absences:
+          type: integer
+          format: int32
+          example: 43
