@@ -35,13 +35,36 @@ def test_success_predict_route():
     assert response_2.get_data() == {b'0', b'3', b'3', b'4', b'1', b'7'}
 
 
-def test_400_1():
+def test_invalid_argument_type():
     app = Flask(__name__)
     configure_routes(app)
     client = app.test_client()
-    url = '/predict?age=18&absences=21&health=hello”'
+    url = '/predict?age=18&absences=21&health=hello'
 
     response = client.get(url)
 
+    # returns 400 response with invalid argument type
+    assert response.status_code == 400
+
+def test_missing_inputs():
+    app = Flask(__name__)
+    configure_routes(app)
+    client = app.test_client()
+    url = '/predict?age=18'
+
+    response = client.get(url)
+
+    # returns 400 response with missing inputs
+    assert response.status_code == 400
+
+def test_improperly_formatted_inputs():
+    app = Flask(__name__)
+    configure_routes(app)
+    client = app.test_client()
+    url = '/predict?age=18absences=6G1=3G2=5studytime=3'
+
+    response = client.get(url)
+
+    # returns 400 response with improperly formatted inputs
     assert response.status_code == 400
 
