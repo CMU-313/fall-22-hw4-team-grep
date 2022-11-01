@@ -44,4 +44,13 @@ def test_400_1():
     response = client.get(url)
 
     assert response.status_code == 400
-
+    
+def test_400_2():
+    ap = Flas(__name__)
+    configure_routes(app)
+    client = app.test_client()
+    url = '/predict?age=blah&absences=2&health=3'
+    
+    response = client.get(url)
+    
+    assert response.status_code == 400
