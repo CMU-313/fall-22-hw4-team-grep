@@ -49,7 +49,7 @@ def test_400_2():
     app = Flask(__name__)
     configure_routes(app)
     client = app.test_client()
-    url = '/predict?age=blah&absences=2&health=3'
+    url = '/predict?age=blah&absences=2'
     
     response = client.get(url)
     
