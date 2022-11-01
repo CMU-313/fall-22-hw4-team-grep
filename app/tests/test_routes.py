@@ -46,7 +46,7 @@ def test_400_1():
     assert response.status_code == 400
     
 def test_400_2():
-    ap = Flask(__name__)
+    app = Flask(__name__)
     configure_routes(app)
     client = app.test_client()
     url = '/predict?age=blah&absences=2&health=3'
