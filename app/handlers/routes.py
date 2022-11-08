@@ -18,11 +18,17 @@ def configure_routes(app):
     # request returns a json object with the admisison prediction and student information
     @app.route('/predict')
     def predict():
-        G1 = request.args.get('G1')
-        G2 = request.args.get('G2')
-        failures = request.args.get('failures')
-        studytime = request.args.get('studytime')
-        absences = request.args.get('absences')
+        G1 = request.args.get('G1', type=int)
+        G2 = request.args.get('G2', type=int)
+        failures = request.args.get('failures', type=int)
+        studytime = request.args.get('studytime', type=int)
+        absences = request.args.get('absences', type=int)
+        print(G1, G2, failures, studytime, absences)
+        
+        # check if all inputs are present
+        if G1 is None or G2 is None or failures is None or studytime is None or absences is None:
+            return jsonify({'Error': 'Missing inputs or inputs invalid!'}), 400
+
         data = [[G1], [G2], [failures], [studytime], [absences]]
         query_df = pd.DataFrame({
             'G1': pd.Series(G1),
