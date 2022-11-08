@@ -77,10 +77,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/prediction'
-        "404":
-          description: Inputted values not found!
         "400":
-          description: Inputted values are not valid!
+          description: Unsucessful Prediciton due to invalid request
 components:
   schemas:
     prediction:
