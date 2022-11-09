@@ -2,6 +2,13 @@
 
 Please consult the [homework assignment](https://cmu-313.github.io//assignments/hw4) for additional context and instructions for this code.
 
+### Feature: Student Quality Prediction
+In order to assist the CMU decisions committee in filtering applicants, we have created a microservice that predicts the quality of the student (defined as G3 grade >15) with a random forest clasifier on 5 features. These features include weekly hours studied, number of absences, number of failures, and their G1 and G2 grades. 
+
+We chose our features based on results of data analysis against G3 scores. Of the 5 features, studytime, G1, and G2 scores are directly correlated to high G3 scores. Failures are inversely correlated with G3 scores. Lastly, students with >15 absences are very unlikely to get high G3 scores. On 394 samples, our model achieved an accuracy of 96.8%. This is a >40% improvement over the older model.  
+
+When a GET request is made to the `/predict/` endpoint with the necessary fields listed above, the microservice responds with a 200 response and a binary value AdmissionStatus. If the parameters are invalid, a 404 error is thrown.
+
 ## pipenv
 
 [pipenv](https://pipenv.pypa.io/en/latest) is a packaging tool for Python that solves some common problems associated with the typical workflow using pip, virtualenv, and the good old requirements.txt.
