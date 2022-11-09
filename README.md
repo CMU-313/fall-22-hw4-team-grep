@@ -3,7 +3,7 @@
 Please consult the [homework assignment](https://cmu-313.github.io//assignments/hw4) for additional context and instructions for this code.
 
 ## Feature: Student Quality Prediction
-In order to assist the CMU decisions committee in filtering applicants, we have created a microservice that predicts the quality of the student (defined as G3 grade >15) with a random forest clasifier on 5 features. These features include weekly hours studied, number of absences, number of failures, and their G1 and G2 grades. 
+In order to assist the CMU decisions committee in filtering applicants, we have created a microservice that predicts the quality of the student (defined as G3 grade >15) with a random forest classifier on 5 features. These features include weekly hours studied, number of absences, number of failures, and their G1 and G2 grades. 
 
 We chose our features based on results of data analysis against G3 scores. Of the 5 features, studytime, G1, and G2 scores are directly correlated to high G3 scores. Failures are inversely correlated with G3 scores. Lastly, students with >15 absences are very unlikely to get high G3 scores. On 394 samples, our model achieved an accuracy of 96.8%. This is a >40% improvement over the older model.  
 
