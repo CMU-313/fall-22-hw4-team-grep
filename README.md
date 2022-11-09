@@ -12,6 +12,8 @@ When a GET request is made to the `/predict/` endpoint with the necessary fields
 ## Reasoning for the features
 As mentioned above, the features were chosen based on strong correlations to G3 scores. This section will present a more detailed analysis with graphs generated via pandas. First, it comes as no surprise that G1 and G2 scores are both directly correlated with a higher G3 score, as seen in the following two scatterplots.The only exception are several outlier students who have a 0 as their G3 grade, presumably because they failed to finish the school year.
 
+![G1 Plot](./img/G1_plot.png)
+
 Next, we analyzed the effects of failures and time spent studying (recorded as studytime) on a student’s performance. Due to the quantified nature of these two attributes, we used bar plots of the median G3 score for comparison. It is clear that the number of failures is inversely correlated to the student’s G3 score. Increasing the study time is more nuanced: from 1 to 3 hours a week, the student’s score is increased, but beyond 3 hours, there is no significant difference in a student’s grade. This hints that if a student is spending a lot of time on a class, they are not necessarily more successful but could be instead struggling in that subject.
 
 Moving on, we also sought to compare the number of absences to the G3 score. Here we found no immediate strong correlation. However, it seems that most students who achieve a G3 grade have no more than 15 absences over the school year. Thus despite the correlation being fairly weak, we still chose to include it in our model.
