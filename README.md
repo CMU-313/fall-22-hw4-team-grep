@@ -2,12 +2,23 @@
 
 Please consult the [homework assignment](https://cmu-313.github.io//assignments/hw4) for additional context and instructions for this code.
 
-### Feature: Student Quality Prediction
+## Feature: Student Quality Prediction
 In order to assist the CMU decisions committee in filtering applicants, we have created a microservice that predicts the quality of the student (defined as G3 grade >15) with a random forest clasifier on 5 features. These features include weekly hours studied, number of absences, number of failures, and their G1 and G2 grades. 
 
 We chose our features based on results of data analysis against G3 scores. Of the 5 features, studytime, G1, and G2 scores are directly correlated to high G3 scores. Failures are inversely correlated with G3 scores. Lastly, students with >15 absences are very unlikely to get high G3 scores. On 394 samples, our model achieved an accuracy of 96.8%. This is a >40% improvement over the older model.  
 
 When a GET request is made to the `/predict/` endpoint with the necessary fields listed above, the microservice responds with a 200 response and a binary value AdmissionStatus. If the parameters are invalid, a 404 error is thrown.
+
+## Reasoning for the features
+As mentioned above, the features were chosen based on strong correlations to G3 scores. This section will present a more detailed analysis with graphs generated via pandas. First, it comes as no surprise that G1 and G2 scores are both directly correlated with a higher G3 score, as seen in the following two scatterplots.The only exception are several outlier students who have a 0 as their G3 grade, presumably because they failed to finish the school year.
+
+Next, we analyzed the effects of failures and time spent studying (recorded as studytime) on a student’s performance. Due to the quantified nature of these two attributes, we used bar plots of the median G3 score for comparison. It is clear that the number of failures is inversely correlated to the student’s G3 score. Increasing the study time is more nuanced: from 1 to 3 hours a week, the student’s score is increased, but beyond 3 hours, there is no significant difference in a student’s grade. This hints that if a student is spending a lot of time on a class, they are not necessarily more successful but could be instead struggling in that subject.
+
+Moving on, we also sought to compare the number of absences to the G3 score. Here we found no immediate strong correlation. However, it seems that most students who achieve a G3 grade have no more than 15 absences over the school year. Thus despite the correlation being fairly weak, we still chose to include it in our model.
+
+Finally, we analyzed various other fields that showed little to no correlation, such as the parent’s education level, as demonstrated below.
+
+
 
 ## pipenv
 
