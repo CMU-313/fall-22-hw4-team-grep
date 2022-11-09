@@ -14,13 +14,21 @@ As mentioned above, the features were chosen based on strong correlations to G3 
 
 ![G1 Plot](./img/G1_plot.png)
 
+![G2 Plot](./img/G2_plot.png)
+
 Next, we analyzed the effects of failures and time spent studying (recorded as studytime) on a student’s performance. Due to the quantified nature of these two attributes, we used bar plots of the median G3 score for comparison. It is clear that the number of failures is inversely correlated to the student’s G3 score. Increasing the study time is more nuanced: from 1 to 3 hours a week, the student’s score is increased, but beyond 3 hours, there is no significant difference in a student’s grade. This hints that if a student is spending a lot of time on a class, they are not necessarily more successful but could be instead struggling in that subject.
+
+![Failure Plot](./img/failure_plot.png)
+
+![Time Studied Plot](./img/studytime_plot.png)
 
 Moving on, we also sought to compare the number of absences to the G3 score. Here we found no immediate strong correlation. However, it seems that most students who achieve a G3 grade have no more than 15 absences over the school year. Thus despite the correlation being fairly weak, we still chose to include it in our model.
 
-Finally, we analyzed various other fields that showed little to no correlation, such as the parent’s education level, as demonstrated below.
+![Absence Plot](./img/absence_plot.png)
 
+Finally, we analyzed various other fields that showed little to no correlation, such as the parent’s education level, as demonstrated below. Thus we have chosen to exclude them from our model.
 
+![Mother Education Plot](./img/Medu_plot.png)
 
 ## pipenv
 
